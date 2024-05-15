@@ -1,12 +1,8 @@
 package tabou.xml;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
 import java.util.function.Consumer;
 import javax.xml.transform.Result;
-import javax.xml.stream.XMLStreamWriter;
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
 
 public class HtmWriter implements AutoCloseable{
     XmlWriter xWriter;

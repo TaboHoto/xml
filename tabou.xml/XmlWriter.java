@@ -1,6 +1,5 @@
 package tabou.xml;
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.Stack;
 import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamResult;

@@ -10,18 +10,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 import javax.xml.xpath.XPathNodes;
 import javax.xml.xpath.XPathExpressionException;
-import org.w3c.dom.CharacterData;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class Xpath{
@@ -32,18 +29,17 @@ public class Xpath{
   .xpath(args[1]).printXml();
  }
  public static Document emptyDocument(){
-        try{
-            Document docu =
-            DocumentBuilderFactory.newInstance()
-                .newDocumentBuilder()
-                .newDocument();
-            docu.appendChild(docu.createElement("xpath"));
-            return docu;
-        }catch(Exception e){
-            throw new RuntimeException(e);
-        }
-    }
-    public static void printXml(Document dom){
+  try{
+   Document docu = DocumentBuilderFactory
+    .newInstance().newDocumentBuilder()
+    .newDocument();
+   docu.appendChild(docu.createElement("xpath"));
+   return docu;
+  }catch(ParserConfigurationException e){
+   throw new RuntimeException(e);
+  }
+ }
+ public static void printDom(Document dom){
         try{
         Transformer transformer = TransformerFactory.newInstance()
             .newTransformer();
@@ -54,8 +50,8 @@ public class Xpath{
         }catch(Exception e){
             throw new RuntimeException(e);
         }
-    }
-    public static void printXml(Element dom){
+ }
+ public static void printElement(Element dom){
         try{
         Transformer transformer = TransformerFactory.newInstance()
             .newTransformer();
@@ -102,7 +98,7 @@ public class Xpath{
   .forEach(x -> docElement
    .appendChild(docu
      .importNode(x.getElement(),true)));
-  printXml(docu);
+  printDom(docu);
  }
  public List<Xml> xmlList(){
   var list = new ArrayList<Xml>();
