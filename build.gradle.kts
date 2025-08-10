@@ -4,12 +4,12 @@ plugins{
   id("java-library")
   id("maven-publish")
 }
-group = "tabou.xml"
+group = "tabou"
 version = "0.1"
 repositories.mavenCentral()
 sourceSets {
     main {
-        java.srcDir(".")
+        java.srcDir("src")
     }
 }
 tasks.withType<JavaCompile>().configureEach{
@@ -20,6 +20,8 @@ publishing {
  publications {
   create<MavenPublication>("maven") {
    from(components["java"])
+   artifactId = (project.group.toString() + "."
+    + rootProject.name)
   }
  }
 }
