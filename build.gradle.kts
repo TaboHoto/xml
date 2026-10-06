@@ -15,8 +15,8 @@ tasks.withType<JavaCompile>().configureEach{
   options.encoding = "UTF-8"
 }
 tasks.withType<Jar>().configureEach{
- archiveBaseName.set(project.group.toString() + "."
-  + rootProject.name)
+ archiveBaseName.set(project.group.toString()
+  + "." + rootProject.name)
 }
 publishing {
  publications {

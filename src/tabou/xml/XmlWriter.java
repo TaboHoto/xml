@@ -10,10 +10,10 @@ import javax.xml.stream.XMLStreamException;
 public class XmlWriter implements AutoCloseable{
  private XMLStreamWriter xWriter;
  private Stack<String> stack = new Stack<>();
- public XmlWriter(Result input){
+ public XmlWriter(Result output){
   try{
    this.xWriter = XMLOutputFactory.newFactory()
-    .createXMLStreamWriter(input);
+    .createXMLStreamWriter(output);
   }catch(XMLStreamException e){
    throw new RuntimeException(e);
   }
@@ -54,17 +54,18 @@ public class XmlWriter implements AutoCloseable{
         }
         return this;
     }
-    @Override
-    public void close(){
-        try{
-            if(this.stack.empty()){
-                this.xWriter.close();
-                return;
-            }
-            this.xWriter.writeEndElement();
-            this.stack.pop();
-        }catch(XMLStreamException e){
-            throw new RuntimeException(e);
-        }
-    }
+ @Override
+ public void close(){
+  try{
+   if(this.stack.empty()){
+    this.xWriter.close();
+    return;
+   }
+   this.xWriter.writeEndElement();
+   this.xWriter.writeCharacters("\n");
+   this.stack.pop();
+  }catch(XMLStreamException e){
+   throw new RuntimeException(e);
+  }
+ }
 }
