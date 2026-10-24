@@ -49,7 +49,8 @@ public class Xml{
   var nodeList = this.element.getChildNodes();
   for(int i= 0;i < nodeList.getLength();i++){
    var node = nodeList.item(i);
-   if(node.getNodeType() == Node.TEXT_NODE){
+   if (node.getNodeType() == Node.TEXT_NODE
+    || node.getNodeType() == Node.ELEMENT_NODE){
     list.add(node.getTextContent());
    }
   }
