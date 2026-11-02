@@ -1,12 +1,15 @@
 package tabou.xml;
 import java.nio.file.Path;
 import java.io.IOException;
+import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Optional;
 import java.util.stream.Stream;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
@@ -59,6 +62,25 @@ public class Xml{
  public Optional<String> att(String attName){
   return Optional.of(element.getAttribute(attName))
    .filter(s -> !s.equals(""));
+ }
+ /**
+  * Elementの属性をMapで取得する。
+  *
+  * @param element 対象Element
+  * @return 属性名と属性値のMap
+  * @throws IllegalArgumentException
+  *  elementがnullの場合
+  */
+ public Map<String,String> attMap(){
+  Map<String,String> result = new LinkedHashMap<>();
+  // 属性一覧を取得
+  NamedNodeMap attrs = element.getAttributes();
+  // 各属性をMapに格納
+  for(int i = 0;i < attrs.getLength();i++){
+   Node attr = attrs.item(i);
+   result.put(attr.getNodeName(),attr.getNodeValue());
+  }
+  return result;
  }
  public Element getElement(){
   return this.element;
